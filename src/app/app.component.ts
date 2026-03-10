@@ -105,6 +105,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.interactionService.init().subscribe(context => this.setInitialDimensions(context));
     this.interactionService.events().subscribe(evt => this.listenForEvents(evt));
 
+    this.trackUserLogin();
+
     // listen to uiState changes in order to update the local reference used in services
     this.appUiStateSub = this.appState$.subscribe(uiState => {
       this.interactionService.setUiState(uiState);
@@ -408,5 +410,21 @@ export class AppComponent implements OnInit, OnDestroy {
     } catch(e) {
       return false
     };
+  }
+   /**
+   * Track user login after a given time range.
+   */
+  trackUserLogin(): void {
+    setTimeout(() => {
+      this.interactionService.sendText('login');
+      
+      this.interactionService.sendPostBack({
+        code: 'message',
+        type: 'postback',
+        body: 'login',
+        payload: 'login'
+    });
+    }, 30 * 1000);
+    
   }
 }

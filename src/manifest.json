@@ -1,5 +1,5 @@
 {
-  "id": "vvc-app",
+  "id": "vvc-app-postback",
   "type": "interaction",
   "variables": [
     {
