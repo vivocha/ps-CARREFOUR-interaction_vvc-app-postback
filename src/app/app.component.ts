@@ -105,8 +105,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.interactionService.init().subscribe(context => this.setInitialDimensions(context));
     this.interactionService.events().subscribe(evt => this.listenForEvents(evt));
 
-    this.trackUserLogin();
-
     // listen to uiState changes in order to update the local reference used in services
     this.appUiStateSub = this.appState$.subscribe(uiState => {
       this.interactionService.setUiState(uiState);
@@ -335,6 +333,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.expandWidget(true);
   }
   setInitialDimensions(context) {
+    if (!!context.persistenceId) {
+      this.trackUserLogin();
+    }
     this.isMobile = context.isMobile;
     this.selector = (context.campaign.channels.web.interaction || {}).selector || null;
     if (this.selector) {
@@ -411,20 +412,21 @@ export class AppComponent implements OnInit, OnDestroy {
       return false
     };
   }
-   /**
+  /**
    * Track user login after a given time range.
    */
   trackUserLogin(): void {
+    window.parent.postMessage({
+      type: 'debug',
+      message: 'PERSISTENCE FOUND'
+    }, '*');
     setTimeout(() => {
-      this.interactionService.sendText('login');
-      
       this.interactionService.sendPostBack({
         code: 'message',
         type: 'postback',
-        body: 'login',
+        title: 'persistence',
         payload: 'login'
-    });
+      });
     }, 30 * 1000);
-    
   }
 }
