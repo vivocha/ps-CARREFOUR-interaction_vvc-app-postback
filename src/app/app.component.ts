@@ -334,7 +334,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   setInitialDimensions(context) {
     if (!!context.persistenceId) {
-      this.trackUserLogin();
+      this.checkUserLogin(context.persistenceId);
     }
     this.isMobile = context.isMobile;
     this.selector = (context.campaign.channels.web.interaction || {}).selector || null;
@@ -412,21 +412,47 @@ export class AppComponent implements OnInit, OnDestroy {
       return false
     };
   }
+
   /**
-   * Track user login after a given time range.
+   * 
    */
-  trackUserLogin(): void {
-    window.parent.postMessage({
-      type: 'debug',
-      message: 'PERSISTENCE FOUND'
-    }, '*');
-    setTimeout(() => {
-      this.interactionService.sendPostBack({
-        code: 'message',
-        type: 'postback',
-        title: 'persistence',
-        payload: 'login'
+  sendPostBack(): void {
+    setTimeout(() => this.interactionService.sendPostBack({
+      code: 'message',
+      type: 'postback',
+      title: 'persistence',
+      payload: 'login'
+    }), 1000);
+  }
+
+  /**
+   * 
+   * @param id 
+   */
+  async checkUserLogin(id: string): Promise<void> {
+    try {
+      const getContact = await fetch(`https://i3.vivocha.com/a/fmoretti/api/v3/contacts/${id}?decrypt=1`, {
+        headers: {
+          'Authorization': 'Bearer'
+        }
       });
-    }, 30 * 1000);
+      if (!!getContact && getContact.ok) {
+        const contact = await getContact.json();
+        if (!!contact.data) {
+          window.parent.postMessage({
+            type: 'debug',
+            message: 'CONTACT: ' + JSON.stringify(contact)
+          }, '*');
+          const contactData = contact.data.find((dataCollection: any) => dataCollection.name === 'inbound_it');
+          contactData.data.forEach((item: any) => {
+            if (item.name === 'login' && item.value === 'true') {
+              this.sendPostBack();
+            }
+          });
+        }
+      }
+    } catch (error) {
+      throw new Error(`❌ ${error.message}.`);
+    }
   }
 }
