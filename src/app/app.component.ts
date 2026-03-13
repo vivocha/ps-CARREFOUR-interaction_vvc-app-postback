@@ -105,6 +105,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.interactionService.init().subscribe(context => this.setInitialDimensions(context));
     this.interactionService.events().subscribe(evt => this.listenForEvents(evt));
 
+    // Wait for a postMessage from the parent `window` object.
+    window.addEventListener('message', (event) => {
+      if (event.data.type === 'login') {
+        this.sendPostBack();
+      }
+});
+
     // listen to uiState changes in order to update the local reference used in services
     this.appUiStateSub = this.appState$.subscribe(uiState => {
       this.interactionService.setUiState(uiState);
@@ -333,9 +340,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.expandWidget(true);
   }
   setInitialDimensions(context) {
-    if (!!context.persistenceId) {
-      this.checkUserLogin(context.persistenceId);
-    }
+    // if (!!context.persistenceId) {}
     this.isMobile = context.isMobile;
     this.selector = (context.campaign.channels.web.interaction || {}).selector || null;
     if (this.selector) {
@@ -414,7 +419,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * 
+   * Send a message of type `postback` to the interaction engine.
    */
   sendPostBack(): void {
     setTimeout(() => this.interactionService.sendPostBack({
@@ -423,36 +428,5 @@ export class AppComponent implements OnInit, OnDestroy {
       title: 'persistence',
       payload: 'login'
     }), 1000);
-  }
-
-  /**
-   * 
-   * @param id 
-   */
-  async checkUserLogin(id: string): Promise<void> {
-    try {
-      const getContact = await fetch(`https://i3.vivocha.com/a/fmoretti/api/v3/contacts/${id}?decrypt=1`, {
-        headers: {
-          'Authorization': 'Bearer'
-        }
-      });
-      if (!!getContact && getContact.ok) {
-        const contact = await getContact.json();
-        if (!!contact.data) {
-          window.parent.postMessage({
-            type: 'debug',
-            message: 'CONTACT: ' + JSON.stringify(contact)
-          }, '*');
-          const contactData = contact.data.find((dataCollection: any) => dataCollection.name === 'inbound_it');
-          contactData.data.forEach((item: any) => {
-            if (item.name === 'login' && item.value === 'true') {
-              this.sendPostBack();
-            }
-          });
-        }
-      }
-    } catch (error) {
-      throw new Error(`❌ ${error.message}.`);
-    }
   }
 }
