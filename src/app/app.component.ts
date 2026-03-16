@@ -105,12 +105,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.interactionService.init().subscribe(context => this.setInitialDimensions(context));
     this.interactionService.events().subscribe(evt => this.listenForEvents(evt));
 
-    // Wait for a postMessage from the parent `window` object.
+    // Wait for a `postMessage` from the parent `window` object.
     window.addEventListener('message', (event) => {
       if (event.data.type === 'login') {
         this.sendPostBack();
       }
-});
+    });
 
     // listen to uiState changes in order to update the local reference used in services
     this.appUiStateSub = this.appState$.subscribe(uiState => {
@@ -419,7 +419,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Send a message of type `postback` to the interaction engine.
+   * Send a message of type `postback` to the Vivocha Interaction Engine.
    */
   sendPostBack(): void {
     setTimeout(() => this.interactionService.sendPostBack({
