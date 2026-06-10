@@ -426,7 +426,7 @@ export class AppComponent implements OnInit, OnDestroy {
       code: 'message',
       type: 'postback',
       title: 'persistence',
-      payload: 'login'
+      payload: '/login'
     }), 1000);
   }
 }

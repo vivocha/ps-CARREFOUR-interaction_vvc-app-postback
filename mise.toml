@@ -1,0 +1,23 @@
+[env]
+
+[tools]
+"npm:@angular/cli" = "8"
+node = "14"
+
+
+[tasks.build]
+run = "npm run build"
+
+[tasks.vvc-build]
+dir = "dist"
+run = [
+  "vvc widget push -a",
+]
+
+[tasks.push]
+alias = "p"
+run = [
+  {task = "build"},
+  {task = "vvc-build"}
+]
+
