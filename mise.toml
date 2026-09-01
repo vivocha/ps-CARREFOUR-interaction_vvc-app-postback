@@ -2,7 +2,7 @@
 
 [tools]
 "npm:@angular/cli" = "8"
-node = "14"
+node = "12"
 
 
 [tasks.build]

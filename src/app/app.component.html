@@ -33,6 +33,7 @@
                    (onVideoUpgrade)="askForVideoUpgrade()"
                    (onVoiceUpgrade)="askForVoiceUpgrade()"></vvc-top-bar>
 
+
       <vvc-data-collection id="vvc-data-collection"
                            [context]="appState"
                            *ngIf="appState.showDataCollectionPanel"
@@ -69,7 +70,6 @@
                             (close)="closeUploadPanel()"
                             (upload)="doUpload($event)"></vvc-upload-panel>
         </div>
-
         <div class="vvc-messages">
           <div *ngFor="let m of appState.messages; trackBy: trackByMethod">
             <vvc-system-message [message]="m" *ngIf="m.type === 'system'"></vvc-system-message>

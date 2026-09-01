@@ -119,23 +119,23 @@
     "id": "META.GROUPS.CALL_REJECTED",
     "values": {
       "de": {
-        "value": "Anruf abgelehnt",
+        "value": " ",
         "state": "final"
       },
       "en": {
-        "value": "Call Rejected",
+        "value": " ",
         "state": "final"
       },
       "es": {
-        "value": "Llamada rechazada",
+        "value": " ",
         "state": "final"
       },
       "fr": {
-        "value": "Appel refusé",
+        "value": " ",
         "state": "final"
       },
       "it": {
-        "value": "Chiamata Rifiutata",
+        "value": " ",
         "state": "final"
       },
       "ja": {
@@ -2708,27 +2708,28 @@
         "state": "new"
       }
     }
-  },{
+  },
+  {
     "id": "STRINGS.CALL_USER_REJECTED",
     "values": {
       "de": {
-        "value": "Anruf abgelehnt",
+        "value": " ",
         "state": "final"
       },
       "en": {
-        "value": "Call rejected",
+        "value": " ",
         "state": "final"
       },
       "es": {
-        "value": "Llamada rechazada",
+        "value": " ",
         "state": "final"
       },
       "fr": {
-        "value": "Appel rejeté",
+        "value": " ",
         "state": "final"
       },
       "it": {
-        "value": "Chiamata rifiutata",
+        "value": " ",
         "state": "final"
       },
       "ja": {
@@ -3481,8 +3482,12 @@
         "value": "Puis je vous aider?",
         "state": "final"
       },
+      "itx": {
+        "value": "Ciao sono Gaia l'assistente virtuale,\u003Cbr\u003E come posso aiutarti?",
+        "state": "final"
+      },
       "it": {
-        "value": "Come posso aiutarti?",
+        "value": " ",
         "state": "final"
       },
       "ja": {
@@ -3495,27 +3500,27 @@
     "id": "STRINGS.CHAT.ISWRITING",
     "values": {
       "de": {
-        "value": "{{nickname}} schreibt…",
+        "value": "...",
         "state": "final"
       },
       "en": {
-        "value": "{{nickname}} is writing...",
+        "value": "...",
         "state": "final"
       },
       "es": {
-        "value": "{{nickname}} está escribiendo...",
+        "value": "...",
         "state": "final"
       },
       "fr": {
-        "value": "{{nickname}} est en train d'écrire...",
+        "value": "...",
         "state": "final"
       },
       "it": {
-        "value": "{{nickname}} sta scrivendo...",
+        "value": "...",
         "state": "final"
       },
       "ja": {
-        "value": "{{nickname}} 書き込み中",
+        "value": "...",
         "state": "final"
       }
     }
@@ -3540,6 +3545,10 @@
         "state": "final"
       },
       "it": {
+        "value": " ",
+        "state": "final"
+      },
+      "itx": {
         "value": "Ciao sono <b>{{nickname}}</b>,<br> come posso aiutarti?",
         "state": "final"
       },
@@ -5680,23 +5689,23 @@
     "id": "STRINGS.TOPBAR.SUBTITLE_DEFAULT",
     "values": {
       "de": {
-        "value": "Standard-Untertitel der Kopfzeile",
+        "value": " ",
         "state": "final"
       },
       "en": {
-        "value": "Default Topbar Subtitle",
+        "value": " ",
         "state": "final"
       },
       "es": {
-        "value": "Subtítulo predeterminado barra superior",
+        "value": " ",
         "state": "final"
       },
       "fr": {
-        "value": "Sous-titre de la barre supérieure par défaut",
+        "value": " ",
         "state": "final"
       },
       "it": {
-        "value": "Sottotitolo Default Topbar",
+        "value": " ",
         "state": "final"
       },
       "ja": {
@@ -5709,23 +5718,23 @@
     "id": "STRINGS.TOPBAR.TITLE_DEFAULT",
     "values": {
       "de": {
-        "value": "Standard-Titel der Kopfzeile",
+        "value": "Gaia",
         "state": "final"
       },
       "en": {
-        "value": "Default Topbar Title",
+        "value": "Gaia",
         "state": "final"
       },
       "es": {
-        "value": "Título predeterminado barra superior",
+        "value": "Gaia",
         "state": "final"
       },
       "fr": {
-        "value": "Titre de la barre supérieure par défaut",
+        "value": "Gaia",
         "state": "final"
       },
       "it": {
-        "value": "Titolo Default Topbar",
+        "value": "Gaia",
         "state": "final"
       },
       "ja": {
